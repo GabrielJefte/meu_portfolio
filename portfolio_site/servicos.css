@@ -1,0 +1,485 @@
+/* ===== VARIÁVEIS DE CORES ===== */
+:root {
+    --fundo: #101010;
+    --painel: #191919;
+    --painel-hover: #202923;
+    --texto: #f4f4f4;
+    --suave: #aaa;
+    --destaque: #00d6a0;
+    --destaque-claro: #39f0c0;
+    --borda: rgba(0, 214, 160, 0.2);
+    --borda-card: #292929;
+    --linha: #252525;
+}
+
+/* ===== CONFIGURAÇÕES GERAIS ===== */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    /* brilho suave no topo, como na página inicial */
+    background:
+        radial-gradient(circle at 50% -10%, rgba(0, 214, 160, 0.08) 0, transparent 45%),
+        var(--fundo);
+    color: var(--texto);
+    font-family: Arial, Helvetica, sans-serif;
+    animation: aparecerPagina 0.7s ease both;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* foco visível para quem navega pelo teclado */
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--destaque);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* ===== ANIMAÇÕES ===== */
+@keyframes aparecerPagina {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes subirSuave {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== CABEÇALHO (vidro fosco e fixo ao rolar) ===== */
+.topo {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    min-height: 68px;
+    padding: 0 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--linha);
+    background: rgba(16, 16, 16, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.logo {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    transition: color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.logo::first-letter {
+    color: var(--destaque);
+}
+
+.logo:hover {
+    color: var(--destaque);
+    letter-spacing: 2.5px;
+}
+
+/* ===== MENU ===== */
+.menu {
+    display: flex;
+    gap: 28px;
+}
+
+.menu a {
+    position: relative;
+    color: var(--suave);
+    font-size: 12px;
+    transition: color 0.3s ease;
+}
+
+.menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -7px;
+    width: 0;
+    height: 2px;
+    background: var(--destaque);
+    transition: width 0.3s ease;
+}
+
+.menu a:hover,
+.menu a.ativo {
+    color: var(--destaque);
+}
+
+.menu a:hover::after,
+.menu a.ativo::after {
+    width: 100%;
+}
+
+/* ===== BOTÃO DO MENU MOBILE ===== */
+.menu-toggle {
+    display: none;
+    color: white;
+    background: none;
+    border: 0;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* ===== CONTEÚDO PRINCIPAL ===== */
+.conteudo {
+    max-width: 1100px;
+    margin: auto;
+    padding: 65px 7% 90px;
+}
+
+/* ===== CABEÇALHO DA SEÇÃO ===== */
+.cabecalho {
+    margin-bottom: 44px;
+    text-align: center;
+    animation: subirSuave 0.7s ease both;
+}
+
+.sobretitulo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    color: var(--destaque);
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+
+.sobretitulo::before {
+    content: "";
+    width: 28px;
+    height: 2px;
+    background: var(--destaque);
+    border-radius: 2px;
+}
+
+.cabecalho h1 {
+    margin: 12px 0;
+    font-size: clamp(32px, 4vw, 44px);
+    letter-spacing: -1px;
+}
+
+.lead {
+    max-width: 520px;
+    margin: 0 auto;
+    color: var(--suave);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* ===== GRADE DE SERVIÇOS ===== */
+.cartoes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+/* ===== CARTÃO (agora é um link para o contato) ===== */
+.cartao {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 215px;
+    padding: 27px 23px;
+    background: var(--painel);
+    border: 1px solid var(--borda-card);
+    border-radius: 10px;
+
+    /* "backwards" mantém o hover funcionando depois da entrada */
+    animation: subirSuave 0.65s ease backwards;
+
+    transition:
+        transform 0.35s ease,
+        background 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+/* entrada em sequência */
+.cartao:nth-child(1) { animation-delay: 0.10s; }
+.cartao:nth-child(2) { animation-delay: 0.18s; }
+.cartao:nth-child(3) { animation-delay: 0.26s; }
+.cartao:nth-child(4) { animation-delay: 0.34s; }
+.cartao:nth-child(5) { animation-delay: 0.42s; }
+.cartao:nth-child(6) { animation-delay: 0.50s; }
+
+/* reflexo verde atravessando o cartão */
+.cartao::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: -130%;
+    width: 80%;
+    height: 100%;
+    background: linear-gradient(
+        110deg,
+        transparent,
+        rgba(0, 214, 160, 0.09),
+        transparent
+    );
+    transform: skewX(-20deg);
+    transition: left 0.65s ease;
+}
+
+/* linha verde animada no topo */
+.cartao::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--destaque);
+    transition: width 0.35s ease;
+}
+
+.cartao:hover,
+.cartao:focus-visible {
+    transform: translateY(-8px);
+    background: var(--painel-hover);
+    border-color: var(--borda);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.3);
+}
+
+.cartao:hover::before {
+    left: 140%;
+}
+
+.cartao:hover::after,
+.cartao:focus-visible::after {
+    width: 100%;
+}
+
+/* ===== ÍCONES (SVG dentro de um quadrado discreto) ===== */
+.icone {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    background: rgba(0, 214, 160, 0.06);
+    color: var(--destaque);
+    transition:
+        transform 0.35s ease,
+        background 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.icone svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.cartao:hover .icone {
+    transform: translateY(-3px) scale(1.08);
+    background: rgba(0, 214, 160, 0.12);
+    box-shadow: 0 0 18px rgba(0, 214, 160, 0.25);
+}
+
+/* ===== TEXTO DOS CARTÕES ===== */
+.cartao h2 {
+    margin: 20px 0 10px;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.cartao:hover h2 {
+    color: var(--destaque);
+}
+
+.cartao p {
+    margin: 0;
+    color: var(--suave);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* seta que aparece ao passar o mouse */
+.cartao-link {
+    margin-top: auto;
+    padding-top: 18px;
+    color: var(--destaque);
+    font-size: 12px;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateX(-6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.cartao:hover .cartao-link,
+.cartao:focus-visible .cartao-link {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* em telas de toque não existe hover: a seta fica sempre visível */
+@media (hover: none) {
+    .cartao-link {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ===== CHAMADA FINAL ===== */
+.chamada {
+    margin-top: 70px;
+    padding: 50px 30px;
+    border: 1px solid var(--borda);
+    border-radius: 14px;
+    text-align: center;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(0, 214, 160, 0.12) 0, transparent 65%),
+        var(--painel);
+    animation: subirSuave 0.8s ease 0.6s backwards;
+}
+
+.chamada h2 {
+    margin: 0 0 12px;
+    font-size: clamp(22px, 3.2vw, 30px);
+    letter-spacing: -0.5px;
+}
+
+.chamada p {
+    max-width: 440px;
+    margin: 0 auto 22px;
+    color: var(--suave);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.botao {
+    display: inline-block;
+    padding: 13px 24px;
+    border-radius: 6px;
+    background: var(--destaque);
+    color: #071b16;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0 6px 24px rgba(0, 214, 160, 0.25);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+.botao:hover {
+    background: var(--destaque-claro);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 32px rgba(0, 214, 160, 0.4);
+}
+
+.botao:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* ===== RODAPÉ ===== */
+footer {
+    padding: 22px 7%;
+    border-top: 1px solid var(--linha);
+    color: #888;
+    font-size: 11px;
+}
+
+/* ===== TABLET ===== */
+@media (max-width: 900px) {
+    .cartoes {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* ===== CELULAR ===== */
+@media (max-width: 700px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .menu {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        z-index: 5;
+        padding: 20px 7%;
+        background: #191919;
+        flex-direction: column;
+        gap: 22px;
+        border-bottom: 1px solid #303030;
+    }
+
+    .menu.aberto {
+        display: flex;
+    }
+
+    .conteudo {
+        padding: 45px 6% 70px;
+    }
+
+    .cartoes {
+        gap: 12px;
+    }
+
+    .cartao {
+        min-height: 200px;
+        padding: 20px 17px;
+    }
+
+    .cabecalho h1 {
+        font-size: 32px;
+    }
+
+    .chamada {
+        margin-top: 50px;
+        padding: 38px 22px;
+    }
+}
+
+/* ===== CELULARES PEQUENOS ===== */
+@media (max-width: 420px) {
+    .cartoes {
+        grid-template-columns: 1fr;
+    }
+
+    .cartao {
+        min-height: auto;
+        padding: 23px;
+    }
+}
+
+/* ===== ACESSIBILIDADE: REDUZIR ANIMAÇÕES ===== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

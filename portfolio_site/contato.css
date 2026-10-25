@@ -1,0 +1,386 @@
+/* ===== VARIÁVEIS DE CORES ===== */
+:root {
+    --fundo: #101010;
+    --painel: #191919;
+    --painel-hover: #202923;
+    --texto: #f4f4f4;
+    --suave: #aaa;
+    --destaque: #00d6a0;
+    --destaque-claro: #39f0c0;
+    --borda: rgba(0, 214, 160, 0.2);
+    --linha: #252525;
+}
+
+/* ===== CONFIGURAÇÕES GERAIS ===== */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background:
+        radial-gradient(circle at 50% -10%, rgba(0, 214, 160, 0.08) 0, transparent 45%),
+        var(--fundo);
+    color: var(--texto);
+    font-family: Arial, Helvetica, sans-serif;
+    animation: aparecerPagina 0.7s ease both;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--destaque);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* ===== ANIMAÇÕES ===== */
+@keyframes aparecerPagina {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes subirSuave {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== CABEÇALHO (vidro fosco e fixo ao rolar) ===== */
+.topo {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    min-height: 68px;
+    padding: 0 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--linha);
+    background: rgba(16, 16, 16, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.logo {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    transition: color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+.logo::first-letter {
+    color: var(--destaque);
+}
+
+.logo:hover {
+    color: var(--destaque);
+    letter-spacing: 2.5px;
+}
+
+/* ===== MENU ===== */
+.menu {
+    display: flex;
+    gap: 28px;
+}
+
+.menu a {
+    position: relative;
+    color: var(--suave);
+    font-size: 12px;
+    transition: color 0.3s ease;
+}
+
+.menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -7px;
+    width: 0;
+    height: 2px;
+    background: var(--destaque);
+    transition: width 0.3s ease;
+}
+
+.menu a:hover,
+.menu a.ativo {
+    color: var(--destaque);
+}
+
+.menu a:hover::after,
+.menu a.ativo::after {
+    width: 100%;
+}
+
+.menu-toggle {
+    display: none;
+    color: white;
+    background: none;
+    border: 0;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* ===== CONTEÚDO PRINCIPAL ===== */
+.conteudo {
+    min-height: calc(100vh - 130px);
+    display: grid;
+    place-items: center;
+    padding: 60px 7%;
+}
+
+/* ===== PAINEL DE CONTATO ===== */
+.painel {
+    width: 100%;
+    max-width: 680px;
+    padding: clamp(28px, 6vw, 60px);
+    text-align: center;
+    border: 1px solid var(--borda);
+    border-radius: 14px;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(0, 214, 160, 0.12) 0, transparent 60%),
+        var(--painel);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    animation: subirSuave 0.7s ease both;
+}
+
+.sobretitulo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    color: var(--destaque);
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+
+.sobretitulo::before {
+    content: "";
+    width: 28px;
+    height: 2px;
+    background: var(--destaque);
+    border-radius: 2px;
+}
+
+.painel h1 {
+    margin: 18px 0;
+    font-size: clamp(30px, 5vw, 48px);
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.descricao {
+    max-width: 480px;
+    margin: 0 auto;
+    color: var(--suave);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* ===== ESCOLHA DO ASSUNTO ===== */
+.assunto {
+    margin: 30px 0 0;
+    padding: 0;
+    border: 0;
+}
+
+.assunto legend {
+    width: 100%;
+    margin-bottom: 14px;
+    padding: 0;
+    color: #ccc;
+    font-size: 13px;
+}
+
+.opcoes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+}
+
+.opcao {
+    position: relative;
+    cursor: pointer;
+}
+
+/* o radio fica escondido, mas continua acessível pelo teclado */
+.opcao input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+.opcao span {
+    display: block;
+    padding: 8px 15px;
+    border: 1px solid #2f2f2f;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.02);
+    color: #ccc;
+    font-size: 12px;
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.opcao:hover span {
+    color: var(--destaque);
+    border-color: var(--destaque);
+}
+
+.opcao input:checked + span {
+    color: #071b16;
+    background: var(--destaque);
+    border-color: var(--destaque);
+    font-weight: bold;
+}
+
+.opcao input:focus-visible + span {
+    outline: 2px solid var(--destaque);
+    outline-offset: 3px;
+}
+
+/* ===== BOTÃO PRINCIPAL ===== */
+.botao {
+    display: inline-block;
+    margin-top: 28px;
+    padding: 14px 28px;
+    border-radius: 6px;
+    background: var(--destaque);
+    color: #071b16;
+    font-size: 13px;
+    font-weight: 800;
+    box-shadow: 0 6px 24px rgba(0, 214, 160, 0.25);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+.botao:hover {
+    background: var(--destaque-claro);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 32px rgba(0, 214, 160, 0.4);
+}
+
+.botao:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.observacao {
+    margin: 16px 0 0;
+    color: #888;
+    font-size: 11px;
+}
+
+/* ===== OUTROS CANAIS ===== */
+.separador {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 34px 0 20px;
+    color: #777;
+    font-size: 11px;
+}
+
+.separador::before,
+.separador::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--linha);
+}
+
+.canais {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.canais a {
+    padding: 10px 18px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: var(--texto);
+    font-size: 12px;
+    font-weight: bold;
+    transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.canais a:hover {
+    color: var(--destaque);
+    border-color: var(--destaque);
+    transform: translateY(-3px);
+}
+
+/* ===== RODAPÉ ===== */
+footer {
+    padding: 22px 7%;
+    border-top: 1px solid var(--linha);
+    color: #888;
+    font-size: 11px;
+}
+
+/* ===== CELULAR ===== */
+@media (max-width: 700px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .menu {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        z-index: 5;
+        padding: 20px 7%;
+        background: #191919;
+        flex-direction: column;
+        gap: 22px;
+        border-bottom: 1px solid #303030;
+    }
+
+    .menu.aberto {
+        display: flex;
+    }
+
+    .conteudo {
+        padding: 40px 6%;
+    }
+
+    .botao {
+        display: block;
+    }
+}
+
+/* ===== ACESSIBILIDADE: REDUZIR ANIMAÇÕES ===== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

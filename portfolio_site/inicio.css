@@ -1,0 +1,375 @@
+:root {
+  --fundo: #101010;
+  --painel: #171717;
+  --texto: #f4f4f4;
+  --suave: #a8a8a8;
+  --destaque: #00d6a0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---------- CABEÇALHO ---------- */
+.topo {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  min-height: 68px;
+  padding: 0 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #252525;
+  /* efeito de vidro */
+  background: rgba(16, 16, 16, .75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.logo {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  transition: color .3s ease, letter-spacing .3s ease;
+}
+
+/* símbolo ◈ na cor de destaque */
+.logo::first-letter {
+  color: var(--destaque);
+}
+
+.logo:hover {
+  color: var(--destaque);
+  letter-spacing: 2.5px;
+}
+
+.menu {
+  display: flex;
+  gap: 28px;
+}
+
+.menu a {
+  position: relative;
+  color: var(--suave);
+  font-size: 12px;
+  transition: color .2s;
+}
+
+.menu a:hover,
+.menu a.ativo {
+  color: var(--destaque);
+}
+
+/* sublinhado animado */
+.menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 1px;
+  background: var(--destaque);
+  transition: width .25s;
+}
+
+.menu a:hover::after,
+.menu a.ativo::after {
+  width: 100%;
+}
+
+.menu-toggle {
+  display: none;
+  color: var(--texto);
+  background: transparent;
+  border: 0;
+  font-size: 24px;
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  position: relative;
+  min-height: 490px;
+  padding: 85px 7% 75px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: radial-gradient(
+    circle at 78% 40%,
+    #262626 0,
+    #151515 38%,
+    #101010 70%
+  );
+}
+
+.hero-texto {
+  position: relative;
+  z-index: 2;
+  width: 58%;
+}
+
+/* linha de destaque antes do "Olá" */
+.sobretitulo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--suave);
+  font-size: 13px;
+  letter-spacing: .5px;
+}
+
+.sobretitulo::before {
+  content: "";
+  width: 28px;
+  height: 2px;
+  background: var(--destaque);
+  border-radius: 2px;
+}
+
+/* título com leve gradiente */
+h1 {
+  margin: 12px 0 5px;
+  font-size: clamp(38px, 5vw, 66px);
+  letter-spacing: -2px;
+  background: linear-gradient(180deg, #ffffff 40%, #b5b5b5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h1 span {
+  display: block;
+}
+
+.subtitulo {
+  margin: 0;
+  color: #d0d0d0;
+  font-size: clamp(18px, 2vw, 25px);
+}
+
+.descricao {
+  max-width: 390px;
+  margin: 18px 0 28px;
+  color: var(--suave);
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+/* botão com brilho */
+.botao {
+  display: inline-block;
+  padding: 13px 24px;
+  border-radius: 6px;
+  background: var(--destaque);
+  color: #071b16;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 6px 24px rgba(0, 214, 160, .25);
+  transition: transform .25s, box-shadow .25s, filter .25s;
+}
+
+.botao:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 32px rgba(0, 214, 160, .4);
+  filter: brightness(1.1);
+}
+
+/* ---------- IMAGEM DO HERO ---------- */
+.hero-imagem {
+  position: absolute;
+  right: 4%;
+  top: 0;
+  bottom: 0;
+  width: 46%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* brilho suave atrás da foto, na cor de destaque */
+.hero-imagem::before {
+  content: "";
+  position: absolute;
+  inset: 10% 5%;
+  background: radial-gradient(
+    circle at 50% 45%,
+    rgba(0, 214, 160, .14) 0,
+    transparent 65%
+  );
+  filter: blur(40px);
+  z-index: 0;
+}
+
+/* vinheta que dissolve as bordas no fundo do hero */
+.hero-imagem::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(to right,  #151515 0%, transparent 28%),
+    linear-gradient(to left,   #151515 0%, transparent 22%),
+    linear-gradient(to bottom, #151515 0%, transparent 18%),
+    linear-gradient(to top,    #101010 0%, transparent 25%);
+}
+
+.hero-imagem img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: grayscale(100%) contrast(1.05) brightness(.95);
+  opacity: .85;
+
+  /* esmaece as bordas da própria imagem */
+  -webkit-mask-image: radial-gradient(ellipse 75% 85% at 50% 50%, #000 55%, transparent 100%);
+          mask-image: radial-gradient(ellipse 75% 85% at 50% 50%, #000 55%, transparent 100%);
+}
+
+/* tags do rodapé do hero em "pílulas" discretas */
+.hero-rodape {
+  position: absolute;
+  bottom: 20px;
+  left: 7%;
+  right: 7%;
+  z-index: 3;
+  display: flex;
+  gap: 28px;
+  color: #777;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.hero-rodape span {
+  padding: 6px 12px;
+  border: 1px solid #2a2a2a;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .02);
+  transition: color .2s, border-color .2s;
+}
+
+.hero-rodape span:hover {
+  color: var(--destaque);
+  border-color: var(--destaque);
+}
+
+/* ---------- RODAPÉ ---------- */
+footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 22px 7%;
+  color: #777;
+  font-size: 11px;
+  border-top: 1px solid #252525;
+}
+
+footer a {
+  color: var(--destaque);
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 700px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .menu {
+    display: none;
+    position: absolute;
+    top: 68px;
+    left: 0;
+    right: 0;
+    z-index: 5;
+    padding: 20px 7%;
+    background: #171717;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .menu.aberto {
+    display: flex;
+  }
+
+  .hero {
+    min-height: 600px;
+    align-items: flex-start;
+    padding-top: 65px;
+  }
+
+  .hero-texto {
+    width: 100%;
+  }
+
+  .hero-imagem {
+    top: 200px;
+    right: 0;
+    bottom: 0;
+    width: 80%;
+    opacity: .55;
+  }
+
+  .hero-rodape {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  footer {
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+}
+
+/* ---------- ANIMAÇÕES ---------- */
+@keyframes transicaoInicio {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body {
+  animation: transicaoInicio 0.5s ease-out both;
+}
+
+/* entrada escalonada do texto do hero */
+.hero-texto > * {
+  animation: transicaoInicio .7s ease-out both;
+}
+
+.hero-texto > *:nth-child(2) { animation-delay: .1s; }
+.hero-texto > *:nth-child(3) { animation-delay: .2s; }
+.hero-texto > *:nth-child(4) { animation-delay: .3s; }
+.hero-texto > *:nth-child(5) { animation-delay: .4s; }
+
+/* respeita quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

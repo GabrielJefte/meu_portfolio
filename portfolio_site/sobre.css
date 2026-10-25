@@ -1,0 +1,688 @@
+/* ===== VARIÁVEIS DE CORES ===== */
+:root {
+    --fundo: #101010;
+    --painel: #191919;
+    --painel-hover: #202923;
+    --texto: #f4f4f4;
+    --suave: #aaa;
+    --destaque: #00d6a0;
+    --borda: rgba(0, 214, 160, 0.18);
+    --linha: #252525;
+}
+
+/* ===== CONFIGURAÇÕES GERAIS ===== */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--fundo);
+    color: var(--texto);
+    font-family: Arial, Helvetica, sans-serif;
+    animation: aparecerPagina 0.7s ease both;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul,
+ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--destaque);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* ===== ANIMAÇÕES ===== */
+@keyframes aparecerPagina {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes subirSuave {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== CABEÇALHO (vidro fosco e fixo ao rolar) ===== */
+.topo {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    min-height: 68px;
+    padding: 0 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--linha);
+    background: rgba(16, 16, 16, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.logo {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    transition: color 0.3s ease, letter-spacing 0.3s ease;
+}
+
+/* símbolo ◈ na cor de destaque */
+.logo::first-letter {
+    color: var(--destaque);
+}
+
+.logo:hover {
+    color: var(--destaque);
+    letter-spacing: 2.5px;
+}
+
+/* ===== MENU DE NAVEGAÇÃO ===== */
+.menu {
+    display: flex;
+    gap: 28px;
+}
+
+.menu a {
+    position: relative;
+    color: var(--suave);
+    font-size: 12px;
+    transition: color 0.3s ease;
+}
+
+.menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -7px;
+    width: 0;
+    height: 2px;
+    background: var(--destaque);
+    transition: width 0.3s ease;
+}
+
+.menu a:hover,
+.menu a.ativo {
+    color: var(--destaque);
+}
+
+.menu a:hover::after,
+.menu a.ativo::after {
+    width: 100%;
+}
+
+/* ===== BOTÃO DO MENU MOBILE ===== */
+.menu-toggle {
+    display: none;
+    color: white;
+    background: none;
+    border: 0;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* ===== CONTEÚDO PRINCIPAL ===== */
+.conteudo {
+    max-width: 1100px;
+    margin: auto;
+    padding: 70px 7% 90px;
+}
+
+/* ===== APRESENTAÇÃO ===== */
+.sobre {
+    display: grid;
+    grid-template-columns: minmax(200px, 0.8fr) 1.2fr;
+    gap: 55px;
+    align-items: center;
+}
+
+.sobre > div {
+    animation: subirSuave 0.8s ease both;
+    animation-delay: 0.15s;
+}
+
+/* foto com bordas dissolvidas no fundo, como na página inicial */
+.foto {
+    width: 100%;
+    max-height: 460px;
+    object-fit: cover;
+    object-position: center top;
+    filter: grayscale(100%) contrast(1.05) brightness(0.9);
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+
+    /* spotlight em volta da pessoa + fade na parte de baixo (as duas máscaras se combinam) */
+    -webkit-mask-image:
+        linear-gradient(to bottom, #000 80%, transparent 100%),
+        radial-gradient(ellipse 60% 62% at 50% 62%, #000 35%, transparent 100%);
+    -webkit-mask-composite: source-in;
+            mask-image:
+        linear-gradient(to bottom, #000 80%, transparent 100%),
+        radial-gradient(ellipse 60% 62% at 50% 62%, #000 35%, transparent 100%);
+            mask-composite: intersect;
+    transition:
+        filter 0.5s ease,
+        transform 0.5s ease;
+    /* "backwards" mantém o hover funcionando depois da entrada */
+    animation: subirSuave 0.8s ease backwards;
+}
+
+.foto:hover {
+    filter: grayscale(0%) contrast(1);
+    transform: scale(1.025);
+}
+
+.sobretitulo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    color: var(--destaque);
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+
+.sobretitulo::before {
+    content: "";
+    width: 28px;
+    height: 2px;
+    background: var(--destaque);
+    border-radius: 2px;
+}
+
+h1 {
+    margin: 12px 0 8px;
+    font-size: clamp(32px, 4vw, 48px);
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+}
+
+h1 span {
+    display: block;
+    color: var(--destaque);
+}
+
+.sobre h2 {
+    margin: 0 0 18px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #ccc;
+}
+
+.sobre p {
+    max-width: 520px;
+    color: var(--suave);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* ===== BOTÕES ===== */
+.botao {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 13px 24px;
+    border-radius: 6px;
+    background: var(--destaque);
+    color: #071b16;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0 6px 24px rgba(0, 214, 160, 0.25);
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+.botao:hover {
+    background: #39f0c0;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 32px rgba(0, 214, 160, 0.4);
+}
+
+.botao:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.botao-secundario {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 12px 22px;
+    border: 1px solid #333;
+    border-radius: 6px;
+    color: var(--texto);
+    font-size: 12px;
+    font-weight: bold;
+    transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.botao-secundario:hover {
+    color: var(--destaque);
+    border-color: var(--destaque);
+    transform: translateY(-3px);
+}
+
+/* ===== BLOCOS DE SEÇÃO ===== */
+.secao {
+    margin-top: 100px;
+}
+
+.secao-titulo {
+    margin: 0 0 12px;
+    font-size: clamp(22px, 3vw, 30px);
+    letter-spacing: -0.5px;
+}
+
+/* linha verde acima do título */
+.secao-titulo::before {
+    content: "";
+    display: block;
+    width: 28px;
+    height: 2px;
+    margin-bottom: 14px;
+    background: var(--destaque);
+    border-radius: 2px;
+}
+
+.secao-intro {
+    max-width: 520px;
+    margin: 0 0 32px;
+    color: var(--suave);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* ===== CARTÕES (base compartilhada) ===== */
+.valores article,
+.grupo,
+.projeto {
+    position: relative;
+    overflow: hidden;
+    background: var(--painel);
+    border: 1px solid #292929;
+    border-radius: 10px;
+    padding: 26px;
+    transition:
+        transform 0.35s ease,
+        background 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+/* linha verde que cresce no topo */
+.valores article::after,
+.grupo::after,
+.projeto::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--destaque);
+    transition: width 0.35s ease;
+}
+
+.valores article:hover,
+.grupo:hover,
+.projeto:hover {
+    transform: translateY(-6px);
+    background: var(--painel-hover);
+    border-color: var(--borda);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+}
+
+.valores article:hover::after,
+.grupo:hover::after,
+.projeto:hover::after {
+    width: 100%;
+}
+
+.valores h3,
+.grupo h3,
+.projeto h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.valores article:hover h3,
+.grupo:hover h3,
+.projeto:hover h3 {
+    color: var(--destaque);
+}
+
+.valores p,
+.grupo p,
+.projeto p {
+    margin: 0;
+    color: var(--suave);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* ===== VALORES ===== */
+.valores {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 80px;
+}
+
+/* ===== HABILIDADES ===== */
+.grupos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.grupo p {
+    margin-bottom: 18px;
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.chips li {
+    padding: 6px 13px;
+    border: 1px solid #2a2a2a;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.02);
+    color: #ccc;
+    font-size: 12px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.chips li:hover {
+    color: var(--destaque);
+    border-color: var(--destaque);
+}
+
+/* ===== COMO EU TRABALHO ===== */
+.etapas {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    counter-reset: etapa;
+}
+
+.etapas li {
+    counter-increment: etapa;
+    padding-top: 18px;
+    border-top: 1px solid #2c2c2c;
+    transition: border-color 0.3s ease;
+}
+
+.etapas li::before {
+    content: counter(etapa, decimal-leading-zero);
+    display: block;
+    margin-bottom: 12px;
+    color: var(--destaque);
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.etapas li:hover {
+    border-top-color: var(--destaque);
+}
+
+.etapas h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+}
+
+.etapas p {
+    margin: 0;
+    color: var(--suave);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* ===== TRAJETÓRIA ===== */
+.linha-tempo {
+    position: relative;
+    max-width: 680px;
+    padding-left: 30px;
+    border-left: 1px solid #2c2c2c;
+}
+
+.linha-tempo li {
+    position: relative;
+    padding-bottom: 34px;
+}
+
+.linha-tempo li:last-child {
+    padding-bottom: 0;
+}
+
+/* marcador na linha */
+.linha-tempo li::before {
+    content: "";
+    position: absolute;
+    left: -36px;
+    top: 4px;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--fundo);
+    border: 2px solid var(--destaque);
+    box-shadow: 0 0 0 4px var(--fundo);
+}
+
+.linha-tempo time {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--destaque);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.linha-tempo h3 {
+    margin: 0 0 6px;
+    font-size: 16px;
+}
+
+.linha-tempo p {
+    margin: 0;
+    color: var(--suave);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* ===== PROJETOS ===== */
+.projetos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.projeto {
+    display: flex;
+    flex-direction: column;
+}
+
+.projeto .chips {
+    margin: 18px 0 22px;
+}
+
+.projeto .chips li {
+    padding: 4px 10px;
+    font-size: 11px;
+}
+
+.link-projeto {
+    margin-top: auto;
+    color: var(--destaque);
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.link-projeto:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+/* ===== CHAMADA FINAL ===== */
+.chamada {
+    margin-top: 110px;
+    padding: 56px 40px;
+    border: 1px solid var(--borda);
+    border-radius: 14px;
+    text-align: center;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(0, 214, 160, 0.12) 0, transparent 65%),
+        var(--painel);
+}
+
+.chamada h2 {
+    margin: 0 0 12px;
+    font-size: clamp(24px, 3.5vw, 34px);
+    letter-spacing: -0.5px;
+}
+
+.chamada p {
+    max-width: 460px;
+    margin: 0 auto 22px;
+    color: var(--suave);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.chamada-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+}
+
+.chamada-acoes .botao,
+.chamada-acoes .botao-secundario {
+    margin-top: 0;
+}
+
+/* ===== RODAPÉ ===== */
+footer {
+    padding: 22px 7%;
+    border-top: 1px solid var(--linha);
+    color: #777;
+    font-size: 11px;
+}
+
+/* ===== TABLET ===== */
+@media (max-width: 900px) {
+    .etapas {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 28px 18px;
+    }
+
+    .projetos {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 700px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .menu {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        z-index: 5;
+        padding: 20px 7%;
+        background: #191919;
+        flex-direction: column;
+        gap: 22px;
+        border-bottom: 1px solid #303030;
+    }
+
+    .menu.aberto {
+        display: flex;
+    }
+
+    .conteudo {
+        padding: 45px 6% 70px;
+    }
+
+    .sobre {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .foto {
+        max-height: 320px;
+    }
+
+    .valores {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 55px;
+    }
+
+    .secao {
+        margin-top: 70px;
+    }
+
+    .grupos,
+    .projetos {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .valores article,
+    .grupo,
+    .projeto {
+        padding: 20px;
+    }
+
+    .chamada {
+        margin-top: 80px;
+        padding: 40px 22px;
+    }
+}
+
+/* ===== TELAS MUITO PEQUENAS ===== */
+@media (max-width: 420px) {
+    .etapas {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== ACESSIBILIDADE: REDUZIR ANIMAÇÕES ===== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

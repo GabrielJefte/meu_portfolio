@@ -1,0 +1,24 @@
+PORTFÓLIO - COMO USAR
+
+1. Extraia todos os arquivos mantendo-os na mesma pasta.
+2. Abra o arquivo index.html no navegador para visualizar o site.
+3. Páginas e arquivos correspondentes:
+   - index.html + inicio.css + inicio.js
+   - sobre.html + sobre.css + sobre.js
+   - servicos.html + servicos.css + servicos.js
+   - contato.html + contato.css + contato.js
+4. Imagens:
+   - Crie uma pasta chamada "imagens" na mesma pasta dos arquivos.
+   - Coloque suas imagens nela com os nomes foto-principal.jpg e foto-sobre.jpg.
+   - Ou altere os caminhos nos comentários dos arquivos HTML.
+   - Se não houver imagens, a estrutura do site continua funcionando, mas as áreas das fotos ficarão vazias.
+5. Personalização:
+   - Troque "Seu Nome" e os textos de exemplo pelos seus dados.
+   - Edite as cores no início de cada arquivo CSS, especialmente --destaque.
+6. WhatsApp:
+   - O botão "Contate-me" está na página contato.html.
+   - contato.js configura o número 558398117205 e a mensagem inicial.
+   - O WhatsApp abre com a mensagem preenchida; por segurança, o visitante ainda precisa tocar em Enviar.
+7. Para publicar, envie os arquivos para um serviço de hospedagem de sites estáticos. Para testar localmente, basta abrir index.html.
+
+Nota: o código é uma recriação baseada na estrutura visual da captura de tela, não o código-fonte original do site mostrado na imagem.

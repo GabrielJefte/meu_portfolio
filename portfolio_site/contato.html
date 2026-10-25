@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Entre em contato com Gabriel Jefte pelo WhatsApp e tire sua ideia do papel.">
+  <title>Contato | Gabriel Jefte - Desenvolvedor</title>
+  <link rel="stylesheet" href="contato.css">
+  <script src="contato.js" defer></script>
+</head>
+<body>
+  <header class="topo">
+    <a class="logo" href="index.html">◈ GABRIEL JEFTE</a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
+    <nav class="menu" id="menu">
+      <a href="index.html">Início</a>
+      <a href="sobre.html">Sobre</a>
+      <a href="servicos.html">Serviços</a>
+      <a class="ativo" href="contato.html">Contato</a>
+    </nav>
+  </header>
+
+  <main class="conteudo">
+    <section class="painel">
+      <p class="sobretitulo">Entre em contato</p>
+      <h1>Vamos tirar sua ideia do papel?</h1>
+      <p class="descricao">Escolha o assunto e envie uma mensagem pelo WhatsApp. O botão abre uma conversa com um texto inicial pronto para você enviar.</p>
+
+      <fieldset class="assunto">
+        <legend>Sobre o que você quer falar?</legend>
+        <div class="opcoes">
+          <label class="opcao"><input type="radio" name="assunto" value="web"><span>Desenvolvimento web</span></label>
+          <label class="opcao"><input type="radio" name="assunto" value="interfaces"><span>Design de interfaces</span></label>
+          <label class="opcao"><input type="radio" name="assunto" value="identidade"><span>Identidade visual</span></label>
+          <label class="opcao"><input type="radio" name="assunto" value="suporte"><span>Suporte técnico</span></label>
+          <label class="opcao"><input type="radio" name="assunto" value="otimizacao"><span>Otimização</span></label>
+          <label class="opcao"><input type="radio" name="assunto" value="consultoria"><span>Consultoria digital</span></label>
+          <label class="opcao"><input type="radio" name="assunto" value="outro" checked><span>Outro assunto</span></label>
+        </div>
+      </fieldset>
+
+      <!-- O botão abre o WhatsApp no número configurado em contato.js -->
+      <a class="botao" id="whatsapp-link" href="#" target="_blank" rel="noopener noreferrer">Contate-me ↗</a>
+      <p class="observacao">Você poderá revisar a mensagem antes de enviá-la.</p>
+
+      <div class="separador">ou fale por outro canal</div>
+
+      <div class="canais">
+        <a href="mailto:gabriel.sites.vision@gmail.com">E-mail</a>
+        <a href="https://github.com/GabrielJefte" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/gabrieljefte" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>© <span id="ano"></span> Gabriel Jefte</footer>
+</body>
+</html>
